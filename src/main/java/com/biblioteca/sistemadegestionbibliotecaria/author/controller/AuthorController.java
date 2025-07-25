@@ -1,6 +1,7 @@
 package com.biblioteca.sistemadegestionbibliotecaria.author.controller;
 
 import com.biblioteca.sistemadegestionbibliotecaria.author.dto.input.AuthorCreateDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.author.dto.input.AuthorDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.author.dto.input.AuthorRequestDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.author.dto.out.AuthorResponseDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.author.mapper.IAuthorMapper;
@@ -26,8 +27,8 @@ public class AuthorController {
     public ResponseEntity<AuthorResponseDTO> addAuthor(@Valid @RequestBody AuthorRequestDTO authorRequestDTO){
 
         AuthorCreateDTO authorCreateDTO = authorMapper.authorRequestDTOToAuthorCreateDTO(authorRequestDTO);
-        AuthorCreateDTO addAuthor = authorService.addAuthor(authorCreateDTO);
-        AuthorResponseDTO authorResponseDTO = authorMapper.authorCreateDTOToAuthorResponseDTO(addAuthor);
+        AuthorDTO addAuthor = authorService.addAuthor(authorCreateDTO);
+        AuthorResponseDTO authorResponseDTO = authorMapper.authorDTOToAuthorResponseDTO(addAuthor);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(authorResponseDTO);
     }

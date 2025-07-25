@@ -2,6 +2,7 @@ package com.biblioteca.sistemadegestionbibliotecaria.author.service.impl;
 
 import com.biblioteca.sistemadegestionbibliotecaria.author.constants.AuthorErrorMessage;
 import com.biblioteca.sistemadegestionbibliotecaria.author.dto.input.AuthorCreateDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.author.dto.input.AuthorDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.author.entity.AuthorEntity;
 import com.biblioteca.sistemadegestionbibliotecaria.author.exception.AuthorException;
 import com.biblioteca.sistemadegestionbibliotecaria.author.mapper.IAuthorMapper;
@@ -18,7 +19,7 @@ public class AuthorServiceImpl implements IAuthorService {
     private final IAuthorMapper authorMapper;
 
     @Override
-    public AuthorCreateDTO addAuthor(AuthorCreateDTO authorCreateDTO) {
+    public AuthorDTO addAuthor(AuthorCreateDTO authorCreateDTO) {
 
         if(authorRepo.existsByName(authorCreateDTO.name()))
             throw new AuthorException(
@@ -27,6 +28,6 @@ public class AuthorServiceImpl implements IAuthorService {
         AuthorEntity authorEntity = authorMapper.authorCreateDTOToAuthorEntity(authorCreateDTO);
         AuthorEntity authorEntitySave = authorRepo.save(authorEntity);
 
-        return authorMapper.authorEntityToAuthorCreateDTO(authorEntitySave);
+        return authorMapper.authorEntityToAuthorDTO(authorEntitySave);
     }
 }
