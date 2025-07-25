@@ -19,19 +19,19 @@ public class BookExeptionHandler {
                 .stream()
                 .map(error -> ((FieldError) error).getField() + ": " + error.getDefaultMessage())
                 .toList().toString();
-        return new ErrorResponse(String.valueOf(HttpStatus.BAD_REQUEST.value()), errors);
+        return new ErrorResponse(errors);
     }
 
     @ExceptionHandler(BookNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleBookNoNotificationsFoundException(BookNotFoundException ex) {
-        return new ErrorResponse(ex.getCode(), ex.getMessage());
+        return new ErrorResponse(ex.getMessage());
     }
 
     @ExceptionHandler(BookException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponse handleBookException(BookException ex) {
-        return new ErrorResponse(ex.getCode(), ex.getMessage());
+        return new ErrorResponse(ex.getMessage());
     }
 
 }

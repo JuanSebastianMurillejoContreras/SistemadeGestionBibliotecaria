@@ -5,6 +5,7 @@ import com.biblioteca.sistemadegestionbibliotecaria.author.dto.input.AuthorReque
 import com.biblioteca.sistemadegestionbibliotecaria.author.dto.out.AuthorResponseDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.author.mapper.IAuthorMapper;
 import com.biblioteca.sistemadegestionbibliotecaria.author.service.IAuthorService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class AuthorController {
     private final IAuthorMapper authorMapper;
 
     @PostMapping
-    public ResponseEntity<AuthorResponseDTO> addAuthor(@RequestBody AuthorRequestDTO authorRequestDTO){
+    public ResponseEntity<AuthorResponseDTO> addAuthor(@Valid @RequestBody AuthorRequestDTO authorRequestDTO){
 
         AuthorCreateDTO authorCreateDTO = authorMapper.authorRequestDTOToAuthorCreateDTO(authorRequestDTO);
         AuthorCreateDTO addAuthor = authorService.addAuthor(authorCreateDTO);

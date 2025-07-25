@@ -19,19 +19,19 @@ public class AuthorExeptionHandler {
                 .stream()
                 .map(error -> ((FieldError) error).getField() + ": " + error.getDefaultMessage())
                 .toList().toString();
-        return new ErrorResponse(String.valueOf(HttpStatus.BAD_REQUEST.value()), errors);
+        return new ErrorResponse(errors);
     }
 
     @ExceptionHandler(AuthorNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleAuthorNoNotificationsFoundException(AuthorNotFoundException ex) {
-        return new ErrorResponse(ex.getCode(), ex.getMessage());
+        return new ErrorResponse(ex.getMessage());
     }
 
     @ExceptionHandler(AuthorException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponse handleAuthorException(AuthorException ex) {
-        return new ErrorResponse(ex.getCode(), ex.getMessage());
+        return new ErrorResponse(ex.getMessage());
     }
 
 }

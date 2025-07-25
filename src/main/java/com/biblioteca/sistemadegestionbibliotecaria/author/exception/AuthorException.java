@@ -6,10 +6,7 @@ import lombok.Getter;
 @Getter
 public class AuthorException extends RuntimeException  {
 
-    private String code;
-
-    public AuthorException(String code, String message) {
+    public AuthorException(String message) {
         super(message);
-        this.code = code;
     }
 }

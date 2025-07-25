@@ -19,19 +19,19 @@ public class LibraryExeptionHandler {
                 .stream()
                 .map(error -> ((FieldError) error).getField() + ": " + error.getDefaultMessage())
                 .toList().toString();
-        return new ErrorResponse(String.valueOf(HttpStatus.BAD_REQUEST.value()), errors);
+        return new ErrorResponse(errors);
     }
 
     @ExceptionHandler(LibraryNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleNoNotificationsFoundException(LibraryNotFoundException ex) {
-        return new ErrorResponse(ex.getCode(), ex.getMessage());
+        return new ErrorResponse(ex.getMessage());
     }
 
     @ExceptionHandler(LibraryException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponse handleLibroException(LibraryException ex) {
-        return new ErrorResponse(ex.getCode(), ex.getMessage());
+        return new ErrorResponse(ex.getMessage());
     }
 
 
