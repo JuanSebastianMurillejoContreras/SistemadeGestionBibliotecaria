@@ -23,7 +23,7 @@ public class LibraryEntity {
     @Column(nullable = false)
     private String address;
 
-    @OneToMany(mappedBy = "biblioteca", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "library", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BookEntity> books;
 
 }

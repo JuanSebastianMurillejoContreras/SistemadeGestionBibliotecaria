@@ -14,11 +14,11 @@ CREATE TABLE tb_autor (
 -- Tabla de libros
 CREATE TABLE tb_libro (
       id BIGINT AUTO_INCREMENT PRIMARY KEY,
-      titulo VARCHAR(255) NOT NULL,
+      title VARCHAR(255) NOT NULL,
       isbn VARCHAR(255) NOT NULL UNIQUE,
 
       author_id BIGINT NOT NULL,
-      biblioteca_id BIGINT NOT NULL,
+      library_id BIGINT NOT NULL,
 
       CONSTRAINT fk_libro_autor
           FOREIGN KEY (author_id)
@@ -27,7 +27,7 @@ CREATE TABLE tb_libro (
               ON UPDATE CASCADE,
 
       CONSTRAINT fk_libro_biblioteca
-          FOREIGN KEY (biblioteca_id)
+          FOREIGN KEY (library_id)
               REFERENCES tb_biblioteca(id)
               ON DELETE RESTRICT
               ON UPDATE CASCADE

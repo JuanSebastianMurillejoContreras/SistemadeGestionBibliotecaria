@@ -1,0 +1,34 @@
+package com.biblioteca.sistemadegestionbibliotecaria.catalogo_service.controller;
+
+import com.biblioteca.sistemadegestionbibliotecaria.catalogo_service.dto.input.AuthorCreateDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.catalogo_service.dto.input.AuthorRequestDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.catalogo_service.dto.out.AuthorResponseDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.catalogo_service.mapper.IAuthorMapper;
+import com.biblioteca.sistemadegestionbibliotecaria.catalogo_service.service.IAuthorService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/v1/author")
+@RequiredArgsConstructor
+public class AuthorController {
+
+    private final IAuthorService authorService;
+    private final IAuthorMapper authorMapper;
+
+    @PostMapping
+    public ResponseEntity<AuthorResponseDTO> addAuthor(@RequestBody AuthorRequestDTO authorRequestDTO){
+
+        AuthorCreateDTO authorCreateDTO = authorMapper.authorRequestDTOToAuthorCreateDTO(authorRequestDTO);
+        AuthorCreateDTO addAuthor = authorService.addAuthor(authorCreateDTO);
+        AuthorResponseDTO authorResponseDTO = authorMapper.authorCreateDTOToAuthorResponseDTO(addAuthor);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(authorResponseDTO);
+    }
+
+}

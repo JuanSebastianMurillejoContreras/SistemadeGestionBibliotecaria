@@ -23,7 +23,7 @@ public class LibraryServiceImpl implements ILibraryService {
     public String libraryDoesntExistError;
 
 
-    @Value("${properties.messages.error.name-exist}")
+    @Value("${properties.messages.error.name-library-exist}")
     public String libraryNameExistError;
 
     @Override
