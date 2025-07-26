@@ -23,7 +23,7 @@ public class AuthorServiceImpl implements IAuthorService {
 
         if(authorRepo.existsByName(authorCreateDTO.name()))
             throw new AuthorException(
-                    AuthorErrorMessage.AUTOR_DOES_NOT_EXIST + ": " + authorCreateDTO.name());
+                    AuthorErrorMessage.AUTOR_ALREADY_REGISTERED + ": " + authorCreateDTO.name());
 
         AuthorEntity authorEntity = authorMapper.authorCreateDTOToAuthorEntity(authorCreateDTO);
         AuthorEntity authorEntitySave = authorRepo.save(authorEntity);
