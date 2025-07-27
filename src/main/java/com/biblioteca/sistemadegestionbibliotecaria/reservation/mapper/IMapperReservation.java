@@ -19,6 +19,9 @@ public interface IMapperReservation {
     @Mapping(source = "usuario.id", target = "usuarioId")
     @Mapping(source = "book.id", target = "bookId")
     List<ReservationDTO> reservationEntityListToReservationDTOList(List<ReservationEntity> reservationEntities);
+    @Mapping(source = "usuarioId", target = "usuario.id")
+    @Mapping(source = "bookId", target = "book.id")
+    List<ReservationEntity> ReservationDTOListToReservationEntityList(List<ReservationDTO> reservationEntities);
 
     // DTO -> DTO
     List<ReservationResponseDTO> reservationDTOListToReservationResponseDTOList(List<ReservationDTO> reservationDTOs);
