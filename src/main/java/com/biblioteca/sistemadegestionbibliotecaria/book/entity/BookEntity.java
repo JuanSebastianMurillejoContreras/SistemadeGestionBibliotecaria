@@ -1,13 +1,15 @@
 package com.biblioteca.sistemadegestionbibliotecaria.book.entity;
 
 import com.biblioteca.sistemadegestionbibliotecaria.author.entity.AuthorEntity;
-import com.biblioteca.sistemadegestionbibliotecaria.bibliotecas.entity.LibraryEntity;
+import com.biblioteca.sistemadegestionbibliotecaria.libraries.entity.LibraryEntity;
+import com.biblioteca.sistemadegestionbibliotecaria.reservation.entity.ReservationEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -35,6 +37,10 @@ public class BookEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "library_id")
     private LibraryEntity library;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "book", nullable = false)
+    private List<ReservationEntity> LstReservations;
 
     @Override
     public boolean equals(Object o) {

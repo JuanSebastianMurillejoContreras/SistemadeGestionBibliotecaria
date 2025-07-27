@@ -1,4 +1,4 @@
--- Insertar bibliotecas
+-- Insertar libraries
 INSERT INTO tb_biblioteca (name, address) VALUES ('Biblioteca Central', 'Calle 123');
 INSERT INTO tb_biblioteca (name, address) VALUES ('Biblioteca Norte', 'Carrera 45');
 INSERT INTO tb_biblioteca (name, address) VALUES ('Biblioteca Sur', 'Avenida 89');
@@ -23,3 +23,10 @@ VALUES ('La casa de los espíritus', '978-3456789012', 3, 3);
 INSERT INTO tb_usuario (name, email) VALUES ('juan', 'juan@example.com');
 INSERT INTO tb_usuario (name, email) VALUES ('maria', 'maria@example.com');
 INSERT INTO tb_usuario (name, email) VALUES ('pedro', 'pedro@example.com');
+
+INSERT INTO tb_reserva (usuario_id, book_id, date_reservation, is_active)
+VALUES
+    (1, 1, TIMESTAMP '2025-07-27 10:00:00', true),
+    (1, 2, TIMESTAMP '2025-07-27 11:00:00', true),
+    (2, 3, TIMESTAMP '2025-07-27 12:00:00', true);
+

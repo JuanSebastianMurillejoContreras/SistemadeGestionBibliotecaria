@@ -4,5 +4,7 @@ import com.biblioteca.sistemadegestionbibliotecaria.usuario.dto.input.UsuarioCre
 import com.biblioteca.sistemadegestionbibliotecaria.usuario.dto.input.UsuarioDTO;
 
 public interface IUsuarioService {
+
     UsuarioDTO createUsuario(UsuarioCreateDTO usuarioCreateDTO);
+
 }

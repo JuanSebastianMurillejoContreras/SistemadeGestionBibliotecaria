@@ -1,6 +1,6 @@
-package com.biblioteca.sistemadegestionbibliotecaria.usuario.exception;
+package com.biblioteca.sistemadegestionbibliotecaria.reservation.exception;
 
-import com.biblioteca.sistemadegestionbibliotecaria.usuario.dto.out.UsuarioErrorResponse;
+import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.out.ReservationErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -9,29 +9,29 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class UsuarioExeptionHandler {
+public class ReservationExeptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public UsuarioErrorResponse handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public ReservationErrorResponse handleValidationExceptions(MethodArgumentNotValidException ex) {
         String errors = ex.getBindingResult()
                 .getAllErrors()
                 .stream()
                 .map(error -> ((FieldError) error).getField() + ": " + error.getDefaultMessage())
                 .toList().toString();
-        return new UsuarioErrorResponse(errors);
+        return new ReservationErrorResponse(errors);
     }
 
-    @ExceptionHandler(UsuarioNotFoundException.class)
+    @ExceptionHandler(ReservationNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public UsuarioErrorResponse handleUsuarioNotFoundException(UsuarioNotFoundException ex) {
-        return new UsuarioErrorResponse(ex.getMessage());
+    public ReservationErrorResponse handleReservationNotFoundException(ReservationNotFoundException ex) {
+        return new ReservationErrorResponse(ex.getMessage());
     }
 
-    @ExceptionHandler(UsuarioException.class)
+    @ExceptionHandler(ReservationException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public UsuarioErrorResponse handleUsuarioException(UsuarioException ex) {
-        return new UsuarioErrorResponse(ex.getMessage());
+    public ReservationErrorResponse handleReservationException(ReservationException ex) {
+        return new ReservationErrorResponse(ex.getMessage());
     }
 
 }

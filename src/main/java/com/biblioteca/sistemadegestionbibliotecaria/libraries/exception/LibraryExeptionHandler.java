@@ -1,6 +1,6 @@
-package com.biblioteca.sistemadegestionbibliotecaria.usuario.exception;
+package com.biblioteca.sistemadegestionbibliotecaria.libraries.exception;
 
-import com.biblioteca.sistemadegestionbibliotecaria.usuario.dto.out.UsuarioErrorResponse;
+import com.biblioteca.sistemadegestionbibliotecaria.libraries.dto.out.LibraryErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -9,29 +9,31 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class UsuarioExeptionHandler {
+public class LibraryExeptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public UsuarioErrorResponse handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public LibraryErrorResponse handleValidationExceptions(MethodArgumentNotValidException ex) {
         String errors = ex.getBindingResult()
                 .getAllErrors()
                 .stream()
                 .map(error -> ((FieldError) error).getField() + ": " + error.getDefaultMessage())
                 .toList().toString();
-        return new UsuarioErrorResponse(errors);
+        return new LibraryErrorResponse(errors);
     }
 
-    @ExceptionHandler(UsuarioNotFoundException.class)
+    @ExceptionHandler(LibraryNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public UsuarioErrorResponse handleUsuarioNotFoundException(UsuarioNotFoundException ex) {
-        return new UsuarioErrorResponse(ex.getMessage());
+    public LibraryErrorResponse handleLibraryNotFoundException(LibraryNotFoundException ex) {
+        return new LibraryErrorResponse(ex.getMessage());
     }
 
-    @ExceptionHandler(UsuarioException.class)
+    @ExceptionHandler(LibraryException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public UsuarioErrorResponse handleUsuarioException(UsuarioException ex) {
-        return new UsuarioErrorResponse(ex.getMessage());
+    public LibraryErrorResponse handleLibraryException(LibraryException ex) {
+        return new LibraryErrorResponse(ex.getMessage());
     }
+
+
 
 }

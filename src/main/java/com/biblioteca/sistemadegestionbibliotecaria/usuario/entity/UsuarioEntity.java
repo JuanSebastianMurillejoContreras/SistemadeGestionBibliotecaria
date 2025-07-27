@@ -1,9 +1,11 @@
 package com.biblioteca.sistemadegestionbibliotecaria.usuario.entity;
 
+import com.biblioteca.sistemadegestionbibliotecaria.reservation.entity.ReservationEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -20,6 +22,9 @@ public class UsuarioEntity {
 
     @Column(nullable = false, unique = true)
     private String email;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<ReservationEntity> lstReservations;
 
     @Override
     public boolean equals(Object o) {
