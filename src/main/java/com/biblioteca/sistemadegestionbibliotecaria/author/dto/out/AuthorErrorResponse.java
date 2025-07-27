@@ -1,5 +1,5 @@
 package com.biblioteca.sistemadegestionbibliotecaria.author.dto.out;
 
-public record ErrorResponse (
+public record AuthorErrorResponse (
         String message
 ){}

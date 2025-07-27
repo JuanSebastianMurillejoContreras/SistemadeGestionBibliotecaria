@@ -1,10 +1,12 @@
 package com.biblioteca.sistemadegestionbibliotecaria.book.controller;
 
 import com.biblioteca.sistemadegestionbibliotecaria.book.dto.input.BookCreateDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.book.dto.input.BookDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.book.dto.input.BookRequestDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.book.dto.out.BookResponseDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.book.mapper.IBookMapper;
 import com.biblioteca.sistemadegestionbibliotecaria.book.service.IBookService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +23,12 @@ public class BookController {
     private final IBookMapper bookMapper;
 
     @PostMapping
-    public ResponseEntity<BookResponseDTO> addBook(@RequestBody BookRequestDTO bookRequestDTO){
+    public ResponseEntity<BookResponseDTO> addBook(@RequestBody @Valid BookRequestDTO bookRequestDTO){
 
         BookCreateDTO bookCreateDTO = bookMapper.bookRequestDTOToBookCreateDTO(bookRequestDTO);
-        BookCreateDTO addBookCreateDTO = bookService.addBook(bookCreateDTO);
-        BookResponseDTO bookResponseDTO = bookMapper.bookCreateDTOToBookResponseDTO(addBookCreateDTO);
+        BookDTO bookDTO = bookService.addBook(bookCreateDTO);
+        BookResponseDTO bookResponseDTO = bookMapper.bookDTOToBookResponseDTO(bookDTO);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(bookResponseDTO);
     }
-
 }

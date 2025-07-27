@@ -1,6 +1,6 @@
 package com.biblioteca.sistemadegestionbibliotecaria.bibliotecas.exception;
 
-import com.biblioteca.sistemadegestionbibliotecaria.bibliotecas.dto.out.ErrorResponse;
+import com.biblioteca.sistemadegestionbibliotecaria.bibliotecas.dto.out.LibraryErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,25 +13,25 @@ public class LibraryExeptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public LibraryErrorResponse handleValidationExceptions(MethodArgumentNotValidException ex) {
         String errors = ex.getBindingResult()
                 .getAllErrors()
                 .stream()
                 .map(error -> ((FieldError) error).getField() + ": " + error.getDefaultMessage())
                 .toList().toString();
-        return new ErrorResponse(errors);
+        return new LibraryErrorResponse(errors);
     }
 
     @ExceptionHandler(LibraryNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handleLibraryNotFoundException(LibraryNotFoundException ex) {
-        return new ErrorResponse(ex.getMessage());
+    public LibraryErrorResponse handleLibraryNotFoundException(LibraryNotFoundException ex) {
+        return new LibraryErrorResponse(ex.getMessage());
     }
 
     @ExceptionHandler(LibraryException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ErrorResponse handleLibraryException(LibraryException ex) {
-        return new ErrorResponse(ex.getMessage());
+    public LibraryErrorResponse handleLibraryException(LibraryException ex) {
+        return new LibraryErrorResponse(ex.getMessage());
     }
 
 

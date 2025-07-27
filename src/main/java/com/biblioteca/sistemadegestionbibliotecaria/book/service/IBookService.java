@@ -1,9 +1,10 @@
 package com.biblioteca.sistemadegestionbibliotecaria.book.service;
 
 import com.biblioteca.sistemadegestionbibliotecaria.book.dto.input.BookCreateDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.book.dto.input.BookDTO;
 
 public interface IBookService {
 
-    BookCreateDTO addBook(BookCreateDTO bookCreateDTO);
+    BookDTO addBook(BookCreateDTO bookCreateDTO);
 
 }

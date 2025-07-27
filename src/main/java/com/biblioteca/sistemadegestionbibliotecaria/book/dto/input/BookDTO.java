@@ -6,6 +6,6 @@ import com.biblioteca.sistemadegestionbibliotecaria.bibliotecas.dto.input.Librar
 public record BookDTO(
         String title,
         String isbn,
-        AuthorDTO author,
-        LibraryDTO library
+        Long authorId,
+        Long libraryId
 ) {}

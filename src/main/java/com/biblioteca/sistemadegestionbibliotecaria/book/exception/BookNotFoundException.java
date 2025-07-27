@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class BookNotFoundException extends BookException {
-    public BookNotFoundException(String code, String message) {
-        super(code, message);
+    public BookNotFoundException(String message) {
+        super(message);
     }
 }

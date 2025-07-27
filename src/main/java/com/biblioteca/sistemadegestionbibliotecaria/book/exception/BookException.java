@@ -6,10 +6,7 @@ import lombok.Getter;
 @Getter
 public class BookException extends RuntimeException  {
 
-    private String code;
-
-    public BookException(String code, String message) {
+    public BookException(String message) {
         super(message);
-        this.code = code;
     }
 }

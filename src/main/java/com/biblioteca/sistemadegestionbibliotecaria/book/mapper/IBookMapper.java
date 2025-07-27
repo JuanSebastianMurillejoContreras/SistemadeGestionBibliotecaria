@@ -1,6 +1,7 @@
 package com.biblioteca.sistemadegestionbibliotecaria.book.mapper;
 
 import com.biblioteca.sistemadegestionbibliotecaria.book.dto.input.BookCreateDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.book.dto.input.BookDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.book.dto.input.BookRequestDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.book.dto.out.BookResponseDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.book.entity.BookEntity;
@@ -12,7 +13,7 @@ public interface IBookMapper {
 
     // DTO -> DTO
     BookCreateDTO bookRequestDTOToBookCreateDTO(BookRequestDTO bookRequestDTO);
-    BookResponseDTO bookCreateDTOToBookResponseDTO(BookCreateDTO bookCreateDTO);
+    BookResponseDTO bookDTOToBookResponseDTO(BookDTO bookDTO);
 
     // DTO -> Entity
     @Mapping(source = "authorId", target = "author.id")
@@ -25,5 +26,5 @@ public interface IBookMapper {
 
     @Mapping(source = "author.id", target = "authorId")
     @Mapping(source = "library.id", target = "libraryId")
-    BookCreateDTO bookEntityToBookCreateDTO(BookEntity bookEntity);
+    BookDTO bookEntityToBookDTO(BookEntity bookEntity);
 }
