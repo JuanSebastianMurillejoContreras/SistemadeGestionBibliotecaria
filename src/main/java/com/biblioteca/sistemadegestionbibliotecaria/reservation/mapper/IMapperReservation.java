@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface IMapperReservation {
 
-    // Entity -> DTO (forzamos sacar los IDs)
+    // Entity -> DTO
     @Mapping(source = "usuario.id", target = "usuarioId")
     @Mapping(source = "book.id", target = "bookId")
     ReservationDTO reservationEntityToReservationDTO(ReservationEntity entity);

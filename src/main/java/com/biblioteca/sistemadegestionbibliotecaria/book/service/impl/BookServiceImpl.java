@@ -40,4 +40,30 @@ public class BookServiceImpl implements IBookService {
 
         return bookMapper.bookEntityToBookDTO(saved);
     }
+
+    @Override
+    public List<BookDTO> getBooks() {
+        List<BookEntity> bookEntity = bookRepo.findAll();
+        return bookMapper.bookEntityListToBookDTOList(bookEntity);
+    }
+
+    @Override
+    public List<BookDTO> getBookByLibrary(Long libraryId) {
+        List<BookEntity> bookDTOList = bookRepo.findByLibraryId(libraryId);
+        return bookMapper.bookEntityListToBookDTOList(bookDTOList);
+    }
+
+    @Override
+    public List<BookDTO> getBookByAuthor(Long authorId) {
+        List<BookEntity> bookEntityList = bookRepo.findByAuthorId(authorId);
+        return bookMapper.bookEntityListToBookDTOList(bookEntityList);
+    }
+
+    @Override
+    public List<BookDTO> searchBookByTitleOrAuthor(String search) {
+        List<BookEntity> bookEntityList = bookRepo.findByTitleContainingIgnoreCaseOrAuthor_NameContainingIgnoreCase(search, search);
+        return bookMapper.bookEntityListToBookDTOList(bookEntityList);
+    }
+
+
 }
