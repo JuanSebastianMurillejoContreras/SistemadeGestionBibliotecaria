@@ -20,10 +20,7 @@ public interface IBookMapper {
     @Mapping(source = "libraryId", target = "library.id")
     BookEntity bookCreateDTOToBookEntity(BookCreateDTO bookCreateDTO);
 
-
     // Entity -> DTO
-    BookResponseDTO bookEntityToBookResposeDTO(BookEntity bookEntity);
-
     @Mapping(source = "author.id", target = "authorId")
     @Mapping(source = "library.id", target = "libraryId")
     BookDTO bookEntityToBookDTO(BookEntity bookEntity);

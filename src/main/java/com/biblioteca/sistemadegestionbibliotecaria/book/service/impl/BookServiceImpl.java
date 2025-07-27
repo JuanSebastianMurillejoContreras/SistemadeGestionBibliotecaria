@@ -33,9 +33,7 @@ public class BookServiceImpl implements IBookService {
         if (bookRepo.existsByTitle(bookCreateDTO.title()))
             errors.add(BookErrorMessage.BOOK_NAME_ALREADY_REGISTERED + ": " + bookCreateDTO.title());
 
-        if (!errors.isEmpty()) {
-            throw new BookException(String.join("; ", errors));
-        }
+        if (!errors.isEmpty()) throw new BookException(String.join("; ", errors));
 
         BookEntity bookEntity = bookMapper.bookCreateDTOToBookEntity(bookCreateDTO);
         BookEntity saved = bookRepo.save(bookEntity);

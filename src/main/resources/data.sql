@@ -18,3 +18,8 @@ VALUES ('Ficciones', '978-2345678901', 2, 2);
 
 INSERT INTO tb_libro (title, isbn, author_id, library_id)
 VALUES ('La casa de los espíritus', '978-3456789012', 3, 3);
+
+-- Insertar usuarios
+INSERT INTO tb_usuario (name, email) VALUES ('juan', 'juan@example.com');
+INSERT INTO tb_usuario (name, email) VALUES ('maria', 'maria@example.com');
+INSERT INTO tb_usuario (name, email) VALUES ('pedro', 'pedro@example.com');
