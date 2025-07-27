@@ -24,7 +24,7 @@ public class AuthorExeptionHandler {
 
     @ExceptionHandler(AuthorNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handleAuthorNoNotificationsFoundException(AuthorNotFoundException ex) {
+    public ErrorResponse handleAuthorNotFoundException(AuthorNotFoundException ex) {
         return new ErrorResponse(ex.getMessage());
     }
 

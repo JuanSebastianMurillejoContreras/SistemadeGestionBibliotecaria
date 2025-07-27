@@ -1,9 +1,8 @@
 package com.biblioteca.sistemadegestionbibliotecaria.bibliotecas.service;
 
 import com.biblioteca.sistemadegestionbibliotecaria.bibliotecas.dto.input.LibraryCreateDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.bibliotecas.dto.input.LibraryDTO;
 
 public interface ILibraryService {
-
-    LibraryCreateDTO createLibrary(LibraryCreateDTO libraryCreateDTO);
-
+    LibraryDTO createLibrary(LibraryCreateDTO libraryCreateDTO);
 }

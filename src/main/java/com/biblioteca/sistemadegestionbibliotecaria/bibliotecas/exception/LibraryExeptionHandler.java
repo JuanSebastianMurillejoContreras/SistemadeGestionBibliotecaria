@@ -24,13 +24,13 @@ public class LibraryExeptionHandler {
 
     @ExceptionHandler(LibraryNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handleNoNotificationsFoundException(LibraryNotFoundException ex) {
+    public ErrorResponse handleLibraryNotFoundException(LibraryNotFoundException ex) {
         return new ErrorResponse(ex.getMessage());
     }
 
     @ExceptionHandler(LibraryException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ErrorResponse handleLibroException(LibraryException ex) {
+    public ErrorResponse handleLibraryException(LibraryException ex) {
         return new ErrorResponse(ex.getMessage());
     }
 
