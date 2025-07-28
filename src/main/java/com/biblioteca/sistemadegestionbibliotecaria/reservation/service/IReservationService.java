@@ -10,7 +10,7 @@ public interface IReservationService {
 
     List<ReservationDTO> getReservations();
     ReservationDTO addReservation(ReservationCreateDTO reservationCreateDTO);
-    ReservationDTO updateReservation(ReservationUpdateDTO reservationUpdateDTO);
-    List<ReservationDTO> findReservationByUsuario(Long usuarioId);
+    ReservationDTO updateReservation(Long id, ReservationUpdateDTO reservationUpdateDTO);
+    List<ReservationDTO> findReservationActiveByUsuario(Long usuarioId);
 
 }

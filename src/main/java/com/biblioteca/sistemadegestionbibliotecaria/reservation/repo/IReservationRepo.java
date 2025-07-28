@@ -11,8 +11,6 @@ import java.util.List;
 @Repository
 public interface IReservationRepo extends JpaRepository<ReservationEntity, Long> {
 
-    boolean existsReservationByUsuario(UsuarioEntity usuario);
-    boolean existsReservationByUsuarioAndBook(UsuarioEntity usuario, BookEntity book);
-    List<ReservationEntity> findByUsuarioId(Long usuarioId);
+    List<ReservationEntity> findByUsuarioIdAndIsActiveTrue(Long usuarioId);
 
 }

@@ -1,14 +1,14 @@
 package com.biblioteca.sistemadegestionbibliotecaria.reservation.controller;
 
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.ReservationDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.ReservationUpdateDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.out.ReservationResponseDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.mapper.IMapperReservation;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.service.IReservationService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,12 +20,21 @@ public class ReservationController {
     private final IReservationService reservationService;
     private final IMapperReservation mapperReservation;
 
-    @GetMapping
-    public ResponseEntity<List<ReservationResponseDTO>> getAllReservations() {
-        List<ReservationDTO> reservationResponseDTO = reservationService.getReservations();
+    @GetMapping("/by-user/{id}")
+    public ResponseEntity<List<ReservationResponseDTO>> getAllReservations(@PathVariable Long id) {
+        List<ReservationDTO> reservationResponseDTO = reservationService.findReservationActiveByUsuario(id);
         List<ReservationResponseDTO> reservationResponseDTOS =
                 mapperReservation.reservationDTOListToReservationResponseDTOList(reservationResponseDTO);
         return ResponseEntity.ok(reservationResponseDTOS);
     }
 
+    @PutMapping("/cancel-reservation/{id}")
+    public ResponseEntity<ReservationResponseDTO> updateLibro(@PathVariable Long id,
+                                                        @RequestBody @Valid ReservationUpdateDTO reservationUpdateDTO) {
+
+        ReservationDTO reservationUpdate = reservationService.updateReservation(id, reservationUpdateDTO);
+        ReservationResponseDTO reservationResponseDTO = mapperReservation.ReservationDTOToReservationResponseDTO(reservationUpdate);
+
+        return ResponseEntity.ok(reservationResponseDTO);
+    }
 }
