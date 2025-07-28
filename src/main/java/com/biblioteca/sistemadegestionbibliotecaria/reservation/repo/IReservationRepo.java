@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface IReservationRepo extends JpaRepository<ReservationEntity, Long> {
 
+    boolean existsByBook_IdAndIsActive(Long bookId, Boolean isActive);
     List<ReservationEntity> findByIsActiveAndUsuario_Id(Boolean isActive, Long usuarioId);
 
 }
