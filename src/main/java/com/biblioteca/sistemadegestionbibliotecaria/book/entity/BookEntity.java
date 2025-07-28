@@ -38,8 +38,7 @@ public class BookEntity {
     @JoinColumn(name = "library_id")
     private LibraryEntity library;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "book", nullable = false)
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private List<ReservationEntity> LstReservations;
 
     @Override

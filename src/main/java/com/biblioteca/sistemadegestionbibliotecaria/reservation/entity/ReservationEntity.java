@@ -19,11 +19,11 @@ public class ReservationEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "usuario_id", nullable = false)
     private UsuarioEntity usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "book_id", nullable = false)
     private BookEntity book;
 
     @Column(nullable = false)

@@ -1,8 +1,6 @@
 package com.biblioteca.sistemadegestionbibliotecaria.reservation.repo;
 
-import com.biblioteca.sistemadegestionbibliotecaria.book.entity.BookEntity;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.entity.ReservationEntity;
-import com.biblioteca.sistemadegestionbibliotecaria.usuario.entity.UsuarioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +9,6 @@ import java.util.List;
 @Repository
 public interface IReservationRepo extends JpaRepository<ReservationEntity, Long> {
 
-    List<ReservationEntity> findByUsuarioIdAndIsActiveTrue(Long usuarioId);
+    List<ReservationEntity> findByIsActiveAndUsuario_Id(Boolean isActive, Long usuarioId);
 
 }

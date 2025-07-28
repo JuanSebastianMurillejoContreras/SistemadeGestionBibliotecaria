@@ -1,7 +1,5 @@
 package com.biblioteca.sistemadegestionbibliotecaria.reservation.service.impl;
 
-import com.biblioteca.sistemadegestionbibliotecaria.book.dto.input.BookDTO;
-import com.biblioteca.sistemadegestionbibliotecaria.book.entity.BookEntity;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.constants.ReservationErrorMessage;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.ReservationCreateDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.ReservationDTO;
@@ -14,7 +12,6 @@ import com.biblioteca.sistemadegestionbibliotecaria.reservation.service.IReserva
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -33,7 +30,9 @@ public class ReservationServiceImpl implements IReservationService {
 
     @Override
     public ReservationDTO addReservation(ReservationCreateDTO reservationCreateDTO) {
-        return null;
+        ReservationEntity reservationEntity = reservationMapper.ReservationCreateDTOToReservationEntity(reservationCreateDTO);
+        ReservationEntity reservation = reservationRepo.save(reservationEntity);
+        return reservationMapper.reservationEntityToReservationDTO(reservation);
     }
 
     @Override
@@ -49,7 +48,7 @@ public class ReservationServiceImpl implements IReservationService {
 
     @Override
     public List<ReservationDTO> findReservationActiveByUsuario(Long usuarioId) {
-        List<ReservationEntity> bookEntityList = reservationRepo.findByUsuarioIdAndIsActiveTrue(usuarioId);
+        List<ReservationEntity> bookEntityList = reservationRepo.findByIsActiveAndUsuario_Id(true, usuarioId);
         return reservationMapper.reservationEntityListToReservationDTOList(bookEntityList);
     }
 

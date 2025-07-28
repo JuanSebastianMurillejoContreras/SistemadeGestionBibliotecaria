@@ -82,9 +82,17 @@ INSERT INTO tb_usuario (name, email) VALUES ('juan', 'juan@example.com');
 INSERT INTO tb_usuario (name, email) VALUES ('maria', 'maria@example.com');
 INSERT INTO tb_usuario (name, email) VALUES ('pedro', 'pedro@example.com');
 
-INSERT INTO tb_reserva (usuario_id, book_id, date_reservation, is_active)
-VALUES
+INSERT INTO tb_reserva (usuario_id, book_id, date_reservation, is_active) VALUES
 (1, 1, TIMESTAMP '2025-07-27 10:00:00', false),
-(1, 2, TIMESTAMP '2025-07-27 11:00:00', true),
-(2, 3, TIMESTAMP '2025-07-27 12:00:00', true);
+(2, 2, TIMESTAMP '2025-07-27 11:00:00', true),
+(3, 3, TIMESTAMP '2025-07-27 12:00:00', true),
+(1, 4, TIMESTAMP '2025-07-27 13:00:00', true),
+(2, 5, TIMESTAMP '2025-07-27 14:00:00', true),
+(3, 6, TIMESTAMP '2025-07-27 15:00:00', true),
+(1, 7, TIMESTAMP '2025-07-27 16:00:00', true),
+(2, 8, TIMESTAMP '2025-07-27 17:00:00', true),
+(3, 9, TIMESTAMP '2025-07-27 18:00:00', true),
+(1, 10, TIMESTAMP '2025-07-27 19:00:00', true);
+
+
 
