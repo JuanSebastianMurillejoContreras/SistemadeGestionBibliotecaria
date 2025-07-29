@@ -34,7 +34,7 @@ public class ReservationServiceImpl implements IReservationService {
     public ReservationDTO addReservation(ReservationCreateDTO reservationCreateDTO) {
 
         if(reservationRepo.existsByBook_IdAndIsActive(reservationCreateDTO.bookId(), true))
-            throw new LibraryException(ReservationErrorMessage.RESERVATION_EXIST_AND_IS_ACTIVE + ": " + reservationCreateDTO.bookId());
+            throw new LibraryException(ReservationErrorMessage.RESERVATION_EXIST_AND_IS_ACTIVE + ": ID Libro " + reservationCreateDTO.bookId());
 
         ReservationEntity reservationEntity = reservationMapper.ReservationCreateDTOToReservationEntity(reservationCreateDTO);
         ReservationEntity reservation = reservationRepo.save(reservationEntity);
