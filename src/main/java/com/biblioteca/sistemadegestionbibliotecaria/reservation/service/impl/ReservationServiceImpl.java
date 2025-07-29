@@ -58,6 +58,4 @@ public class ReservationServiceImpl implements IReservationService {
         return reservationMapper.reservationEntityListToReservationDTOList(bookEntityList);
     }
 
-
-
 }
