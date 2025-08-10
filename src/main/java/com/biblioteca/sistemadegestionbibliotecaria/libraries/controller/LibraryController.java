@@ -1,5 +1,6 @@
 package com.biblioteca.sistemadegestionbibliotecaria.libraries.controller;
 
+import com.biblioteca.sistemadegestionbibliotecaria.libraries.api.LibraryApi;
 import com.biblioteca.sistemadegestionbibliotecaria.libraries.dto.input.LibraryCreateDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.libraries.dto.input.LibraryDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.libraries.dto.input.LibraryRequestDTO;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/libraries")
 @RequiredArgsConstructor
-public class LibraryController {
+public class LibraryController implements LibraryApi {
 
     private final ILibraryService libraryService;
     private final ILibraryMapper libraryMapper;

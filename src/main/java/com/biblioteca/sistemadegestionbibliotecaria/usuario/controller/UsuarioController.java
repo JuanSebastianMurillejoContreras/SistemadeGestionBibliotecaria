@@ -2,6 +2,7 @@ package com.biblioteca.sistemadegestionbibliotecaria.usuario.controller;
 
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.ReservationDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.out.ReservationResponseDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.usuario.api.UsuarioApi;
 import com.biblioteca.sistemadegestionbibliotecaria.usuario.dto.input.UsuarioCreateDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.usuario.dto.input.UsuarioDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.usuario.dto.input.UsuarioRequestDTO;
@@ -18,7 +19,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/usuario")
-public class UsuarioController {
+public class UsuarioController implements UsuarioApi {
 
     private final IUsuarioService usuarioService;
     private final IUsuarioMapper usuarioMapper;

@@ -21,9 +21,11 @@ public class AuthorServiceImpl implements IAuthorService {
     @Override
     public AuthorDTO addAuthor(AuthorCreateDTO authorCreateDTO) {
 
-        if(authorRepo.existsByName(authorCreateDTO.name()))
-            throw new AuthorException(
-                    AuthorErrorMessage.AUTOR_ALREADY_REGISTERED + ": " + authorCreateDTO.name());
+        boolean existByName = authorRepo.existsByName(authorCreateDTO.name());
+
+        if(existByName){
+            throw new AuthorException(AuthorErrorMessage.AUTOR_ALREADY_REGISTERED + ": " + authorCreateDTO.name());
+        }
 
         AuthorEntity authorEntity = authorMapper.authorCreateDTOToAuthorEntity(authorCreateDTO);
         AuthorEntity authorEntitySave = authorRepo.save(authorEntity);

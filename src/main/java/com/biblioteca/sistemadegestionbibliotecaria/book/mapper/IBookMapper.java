@@ -3,10 +3,12 @@ package com.biblioteca.sistemadegestionbibliotecaria.book.mapper;
 import com.biblioteca.sistemadegestionbibliotecaria.book.dto.input.BookCreateDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.book.dto.input.BookDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.book.dto.input.BookRequestDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.book.dto.out.BookListResponseDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.book.dto.out.BookResponseDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.book.entity.BookEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -32,4 +34,20 @@ public interface IBookMapper {
     @Mapping(source = "author.id", target = "authorId")
     @Mapping(source = "library.id", target = "libraryId")
     BookDTO bookEntityToBookDTO(BookEntity bookEntity);
+
+
+    default BookListResponseDTO toBookListResponseDTO(Page<BookDTO> page) {
+        List<BookResponseDTO> list = page.getContent()
+                .stream()
+                .map(this::bookDTOToBookResponseDTO)
+                .toList();
+
+        return new BookListResponseDTO(
+                list,
+                page.getNumber(),
+                page.getTotalPages(),
+                page.getTotalElements(),
+                page.getSize()
+        );
+    }
 }

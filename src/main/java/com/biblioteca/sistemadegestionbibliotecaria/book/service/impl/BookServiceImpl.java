@@ -9,7 +9,8 @@ import com.biblioteca.sistemadegestionbibliotecaria.book.mapper.IBookMapper;
 import com.biblioteca.sistemadegestionbibliotecaria.book.repo.IBookRepo;
 import com.biblioteca.sistemadegestionbibliotecaria.book.service.IBookService;
 import lombok.RequiredArgsConstructor;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,8 +28,8 @@ public class BookServiceImpl implements IBookService {
 
         List<String> errors = new ArrayList<>();
 
-        Boolean existsByIsbn = bookRepo.existsByIsbn(bookCreateDTO.isbn());
-        Boolean existsByTitle = bookRepo.existsByTitle(bookCreateDTO.title());
+        boolean existsByIsbn = bookRepo.existsByIsbn(bookCreateDTO.isbn());
+        boolean existsByTitle = bookRepo.existsByTitle(bookCreateDTO.title());
 
         if (existsByIsbn)
             errors.add(BookErrorMessage.BOOK_ISBN_ALREADY_REGISTERED + ": " + bookCreateDTO.isbn());
@@ -44,15 +45,9 @@ public class BookServiceImpl implements IBookService {
     }
 
     @Override
-    public List<BookDTO> getBooks() {
-        List<BookEntity> bookEntity = bookRepo.findAll();
-        return bookMapper.bookEntityListToBookDTOList(bookEntity);
-    }
-
-    @Override
-    public List<BookDTO> getBookByLibraryOrAuthorOrTitle(Long libraryId, Long authorId, String title) {
-        List<BookEntity> bookEntityList = bookRepo.searchBooks(libraryId, authorId, title);
-        return bookMapper.bookEntityListToBookDTOList(bookEntityList);
+    public Page<BookDTO> getBookByLibraryOrAuthorOrTitle(Long libraryId, Long authorId, String title, Pageable pageable) {
+        Page<BookEntity> bookEntityPage = bookRepo.searchBooks(libraryId, authorId, title, pageable);
+        return bookEntityPage.map(bookMapper::bookEntityToBookDTO);
     }
 
 }

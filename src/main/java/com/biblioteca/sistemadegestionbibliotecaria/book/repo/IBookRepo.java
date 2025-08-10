@@ -1,13 +1,11 @@
 package com.biblioteca.sistemadegestionbibliotecaria.book.repo;
 
-import com.biblioteca.sistemadegestionbibliotecaria.author.entity.AuthorEntity;
 import com.biblioteca.sistemadegestionbibliotecaria.book.entity.BookEntity;
-import com.biblioteca.sistemadegestionbibliotecaria.libraries.entity.LibraryEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import java.util.List;
 
 public interface IBookRepo extends JpaRepository<BookEntity, Long> {
 
@@ -15,14 +13,15 @@ public interface IBookRepo extends JpaRepository<BookEntity, Long> {
     boolean existsByTitle(String title);
 
         @Query("""
-        SELECT b FROM BookEntity b
-        WHERE (:libraryId IS NULL OR b.library.id = :libraryId)
-        AND (:authorId IS NULL OR b.author.id = :authorId)
-        AND (:title IS NULL OR LOWER(b.title) LIKE LOWER(CONCAT('%', :title, '%')))
+        SELECT book FROM BookEntity book
+        WHERE (:libraryId IS NULL OR book.library.id = :libraryId)
+        AND (:authorId IS NULL OR book.author.id = :authorId)
+        AND (:title IS NULL OR LOWER(book.title) LIKE LOWER(CONCAT('%', :title, '%')))
         """)
-        List<BookEntity> searchBooks(
+        Page<BookEntity> searchBooks(
                 @Param("libraryId") Long libraryId,
                 @Param("authorId") Long authorId,
-                @Param("title") String title
+                @Param("title") String title,
+                Pageable pageable
         );
 }

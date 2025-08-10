@@ -1,5 +1,6 @@
 package com.biblioteca.sistemadegestionbibliotecaria.reservation.controller;
 
+import com.biblioteca.sistemadegestionbibliotecaria.reservation.api.ReservationApi;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.ReservationCreateDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.ReservationDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.ReservationRequestDTO;
@@ -18,7 +19,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/reservations")
-public class ReservationController {
+public class ReservationController implements ReservationApi {
 
     private final IReservationService reservationService;
     private final IMapperReservation mapperReservation;
@@ -53,14 +54,5 @@ public class ReservationController {
         return ResponseEntity.ok(reservationResponseDTO);
     }
 
-    /*
-    @PostMapping("/{id}/cancel")
-    public ResponseEntity<ReservationResponseDTO> cancelReservation(@PathVariable Long id) {
-
-        ReservationDTO reservationUpdate = reservationService.updateReservation(id);
-        ReservationResponseDTO reservationResponseDTO = mapperReservation.reservationDTOToReservationResponseDTO(reservationUpdate);
-
-        return ResponseEntity.ok(reservationResponseDTO);
-    }*/
 
 }

@@ -1,5 +1,6 @@
 package com.biblioteca.sistemadegestionbibliotecaria.author.controller;
 
+import com.biblioteca.sistemadegestionbibliotecaria.author.api.AuthorApi;
 import com.biblioteca.sistemadegestionbibliotecaria.author.dto.input.AuthorCreateDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.author.dto.input.AuthorDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.author.dto.input.AuthorRequestDTO;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/authors")
 @RequiredArgsConstructor
-public class AuthorController {
+public class AuthorController implements AuthorApi {
 
     private final IAuthorService authorService;
     private final IAuthorMapper authorMapper;
