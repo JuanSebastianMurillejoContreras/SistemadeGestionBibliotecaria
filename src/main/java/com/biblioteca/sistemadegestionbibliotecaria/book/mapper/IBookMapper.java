@@ -36,14 +36,10 @@ public interface IBookMapper {
     BookDTO bookEntityToBookDTO(BookEntity bookEntity);
 
 
+    // Mapea un Page<BookDTO> a BookListResponseDTO
     default BookListResponseDTO toBookListResponseDTO(Page<BookDTO> page) {
-        List<BookResponseDTO> list = page.getContent()
-                .stream()
-                .map(this::bookDTOToBookResponseDTO)
-                .toList();
-
         return new BookListResponseDTO(
-                list,
+                bookDTOToBookResponseListDTO(page.getContent()),
                 page.getNumber(),
                 page.getTotalPages(),
                 page.getTotalElements(),

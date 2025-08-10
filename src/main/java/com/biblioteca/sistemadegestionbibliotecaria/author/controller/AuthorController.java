@@ -32,6 +32,6 @@ public class AuthorController implements AuthorApi {
         AuthorResponseDTO authorResponseDTO = authorMapper.authorDTOToAuthorResponseDTO(addAuthor);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(authorResponseDTO);
-    }
 
+    }
 }
