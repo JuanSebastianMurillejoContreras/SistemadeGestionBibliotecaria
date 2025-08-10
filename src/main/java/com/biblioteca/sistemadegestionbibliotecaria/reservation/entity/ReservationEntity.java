@@ -36,20 +36,18 @@ public class ReservationEntity {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         ReservationEntity that = (ReservationEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(usuario, that.usuario) && Objects.equals(book, that.book) && Objects.equals(dateReservation, that.dateReservation);
+        return Objects.equals(id, that.id) && Objects.equals(dateReservation, that.dateReservation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, usuario, book, dateReservation);
+        return Objects.hash(id, dateReservation);
     }
 
     @Override
     public String toString() {
         return "ReservationEntity{" +
                 "id=" + id +
-                ", usuario=" + usuario +
-                ", book=" + book +
                 ", dateReservation=" + dateReservation +
                 '}';
     }

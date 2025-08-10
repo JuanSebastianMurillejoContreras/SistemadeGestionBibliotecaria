@@ -21,8 +21,14 @@ public class LibraryServiceImpl implements ILibraryService {
     @Override
     public LibraryDTO createLibrary(LibraryCreateDTO libraryCreateDTO) {
 
+        final boolean existsLibrary = libraryRepo.existsByName(libraryCreateDTO.name());
+        if (existsLibrary)
+            throw new LibraryException(LibraryErrorMessage.LIBRARY_ALREDY_REGISTERED + ": " + libraryCreateDTO.name());
+
+
         if (libraryRepo.existsByName(libraryCreateDTO.name()))
             throw new LibraryException(LibraryErrorMessage.LIBRARY_ALREDY_REGISTERED + ": " + libraryCreateDTO.name());
+
 
         LibraryEntity libraryEntity = libraryMapper.libraryEntityToLibraryCreateDTO(libraryCreateDTO);
         LibraryEntity libraryEntitySave = libraryRepo.save(libraryEntity);

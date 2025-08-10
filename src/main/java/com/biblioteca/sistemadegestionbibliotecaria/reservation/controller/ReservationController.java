@@ -4,6 +4,7 @@ import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.Reserv
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.ReservationDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.ReservationRequestDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.ReservationUpdateDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.out.ReservationListResponseDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.out.ReservationResponseDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.mapper.IMapperReservation;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.service.IReservationService;
@@ -16,21 +17,25 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/reservation")
+@RequestMapping("api/v1/reservations")
 public class ReservationController {
 
     private final IReservationService reservationService;
     private final IMapperReservation mapperReservation;
 
-    @GetMapping("/active-by-user/{id}")
-    public ResponseEntity<List<ReservationResponseDTO>> getReservationsActiveByUser(@PathVariable Long id) {
-        List<ReservationDTO> reservationResponseDTO = reservationService.findReservationActiveByUsuario(id);
+    @GetMapping
+    public ResponseEntity<ReservationListResponseDTO> getReservationsActiveByUser(@RequestParam Long userId) {
+        List<ReservationDTO> reservationResponseDTO = reservationService.findReservationActiveByUsuario(userId);
+
         List<ReservationResponseDTO> reservationResponseDTOS =
                 mapperReservation.reservationDTOListToReservationResponseDTOList(reservationResponseDTO);
-        return ResponseEntity.ok(reservationResponseDTOS);
+
+        ReservationListResponseDTO reservationListResponseDTO = new ReservationListResponseDTO(reservationResponseDTOS);
+
+        return ResponseEntity.ok(reservationListResponseDTO);
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<ReservationResponseDTO> createReservation(@Valid @RequestBody ReservationRequestDTO reservationRequestDTO) {
         ReservationCreateDTO reservationDTO = mapperReservation.reservationRequestDTOToReservationCreateDTO(reservationRequestDTO);
         ReservationDTO reservationAdd = reservationService.addReservation(reservationDTO);
@@ -38,10 +43,8 @@ public class ReservationController {
         return ResponseEntity.ok(reservationResponseDTO);
     }
 
-
-
-    @PutMapping("/cancel/{id}")
-    public ResponseEntity<ReservationResponseDTO> updateLibro(@PathVariable Long id,
+    @PutMapping("/{id}")
+    public ResponseEntity<ReservationResponseDTO> updateReservation(@PathVariable Long id,
                                                         @RequestBody @Valid ReservationUpdateDTO reservationUpdateDTO) {
 
         ReservationDTO reservationUpdate = reservationService.updateReservation(id, reservationUpdateDTO);
@@ -49,4 +52,15 @@ public class ReservationController {
 
         return ResponseEntity.ok(reservationResponseDTO);
     }
+
+    /*
+    @PostMapping("/{id}/cancel")
+    public ResponseEntity<ReservationResponseDTO> cancelReservation(@PathVariable Long id) {
+
+        ReservationDTO reservationUpdate = reservationService.updateReservation(id);
+        ReservationResponseDTO reservationResponseDTO = mapperReservation.reservationDTOToReservationResponseDTO(reservationUpdate);
+
+        return ResponseEntity.ok(reservationResponseDTO);
+    }*/
+
 }

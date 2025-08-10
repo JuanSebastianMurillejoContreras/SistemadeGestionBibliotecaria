@@ -1,5 +1,7 @@
 package com.biblioteca.sistemadegestionbibliotecaria.usuario.controller;
 
+import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.ReservationDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.out.ReservationResponseDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.usuario.dto.input.UsuarioCreateDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.usuario.dto.input.UsuarioDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.usuario.dto.input.UsuarioRequestDTO;
@@ -9,10 +11,9 @@ import com.biblioteca.sistemadegestionbibliotecaria.usuario.service.IUsuarioServ
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,7 +31,6 @@ public class UsuarioController {
         UsuarioResponseDTO usuarioResponseDTO = usuarioMapper.usuarioDTOToUsuarioResponseDTO(usuarioDTO);
 
         return ResponseEntity.ok(usuarioResponseDTO);
-    }
-
+}
 
 }

@@ -27,10 +27,12 @@ public class BookServiceImpl implements IBookService {
 
         List<String> errors = new ArrayList<>();
 
-        if (bookRepo.existsByIsbn(bookCreateDTO.isbn()))
-            errors.add(BookErrorMessage.BOOK_ISBN_ALREADY_REGISTERED + ": " + bookCreateDTO.isbn());
+        Boolean existsByIsbn = bookRepo.existsByIsbn(bookCreateDTO.isbn());
+        Boolean existsByTitle = bookRepo.existsByTitle(bookCreateDTO.title());
 
-        if (bookRepo.existsByTitle(bookCreateDTO.title()))
+        if (existsByIsbn)
+            errors.add(BookErrorMessage.BOOK_ISBN_ALREADY_REGISTERED + ": " + bookCreateDTO.isbn());
+        if (existsByTitle)
             errors.add(BookErrorMessage.BOOK_NAME_ALREADY_REGISTERED + ": " + bookCreateDTO.title());
 
         if (!errors.isEmpty()) throw new BookException(String.join("; ", errors));
@@ -48,22 +50,9 @@ public class BookServiceImpl implements IBookService {
     }
 
     @Override
-    public List<BookDTO> getBookByLibrary(Long libraryId) {
-        List<BookEntity> bookDTOList = bookRepo.findByLibraryId(libraryId);
-        return bookMapper.bookEntityListToBookDTOList(bookDTOList);
-    }
-
-    @Override
-    public List<BookDTO> getBookByAuthor(Long authorId) {
-        List<BookEntity> bookEntityList = bookRepo.findByAuthorId(authorId);
+    public List<BookDTO> getBookByLibraryOrAuthorOrTitle(Long libraryId, Long authorId, String title) {
+        List<BookEntity> bookEntityList = bookRepo.searchBooks(libraryId, authorId, title);
         return bookMapper.bookEntityListToBookDTOList(bookEntityList);
     }
-
-    @Override
-    public List<BookDTO> searchBookByTitleOrAuthor(String search) {
-        List<BookEntity> bookEntityList = bookRepo.findByTitleContainingIgnoreCaseOrAuthor_NameContainingIgnoreCase(search, search);
-        return bookMapper.bookEntityListToBookDTOList(bookEntityList);
-    }
-
 
 }

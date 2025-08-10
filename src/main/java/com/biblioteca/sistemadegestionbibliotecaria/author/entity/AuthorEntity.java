@@ -32,20 +32,19 @@ public class AuthorEntity {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         AuthorEntity that = (AuthorEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(books, that.books);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, books);
+        return Objects.hash(id, name);
     }
 
     @Override
     public String toString() {
         return "AuthorEntity{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", books=" + books +
+                ", name='" + name +
                 '}';
     }
 }
