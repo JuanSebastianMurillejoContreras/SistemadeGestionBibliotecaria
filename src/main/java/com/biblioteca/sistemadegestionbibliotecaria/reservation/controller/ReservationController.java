@@ -11,6 +11,9 @@ import com.biblioteca.sistemadegestionbibliotecaria.reservation.mapper.IMapperRe
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.service.IReservationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,22 +22,20 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/reservations")
-public class ReservationController implements ReservationApi {
+public class ReservationController {
 
     private final IReservationService reservationService;
     private final IMapperReservation mapperReservation;
 
     @GetMapping
-    public ResponseEntity<ReservationListResponseDTO> getReservationsActiveByUser(@RequestParam Long userId) {
-        List<ReservationDTO> reservationResponseDTO = reservationService.findReservationActiveByUsuario(userId);
+    public ResponseEntity<ReservationListResponseDTO> getReservationsActiveByUser(@RequestParam Long userId,
+                                                                                  @PageableDefault(page = 0, size = 10) Pageable pageable) {
 
-        List<ReservationResponseDTO> reservationResponseDTOS =
-                mapperReservation.reservationDTOListToReservationResponseDTOList(reservationResponseDTO);
-
-        ReservationListResponseDTO reservationListResponseDTO = new ReservationListResponseDTO(reservationResponseDTOS);
-
+        Page<ReservationDTO> reservationDTO = reservationService.findReservationActiveByUsuario(userId, pageable);
+        ReservationListResponseDTO reservationListResponseDTO = mapperReservation.toBookListResponseDTO(reservationDTO);
         return ResponseEntity.ok(reservationListResponseDTO);
     }
+
 
     @PostMapping
     public ResponseEntity<ReservationResponseDTO> createReservation(@Valid @RequestBody ReservationRequestDTO reservationRequestDTO) {
@@ -44,13 +45,12 @@ public class ReservationController implements ReservationApi {
         return ResponseEntity.ok(reservationResponseDTO);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ReservationResponseDTO> updateReservation(@PathVariable Long id,
+    @PostMapping("/cancel/{id}")
+    public ResponseEntity<ReservationResponseDTO> cancelReservation(@PathVariable Long id,
                                                         @RequestBody @Valid ReservationUpdateDTO reservationUpdateDTO) {
 
-        ReservationDTO reservationUpdate = reservationService.updateReservation(id, reservationUpdateDTO);
+        ReservationDTO reservationUpdate = reservationService.cancelReservation(id, reservationUpdateDTO);
         ReservationResponseDTO reservationResponseDTO = mapperReservation.reservationDTOToReservationResponseDTO(reservationUpdate);
-
         return ResponseEntity.ok(reservationResponseDTO);
     }
 

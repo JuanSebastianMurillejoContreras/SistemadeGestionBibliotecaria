@@ -1,10 +1,13 @@
 package com.biblioteca.sistemadegestionbibliotecaria.reservation.mapper;
 
+import com.biblioteca.sistemadegestionbibliotecaria.book.dto.input.BookDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.book.dto.out.BookListResponseDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.book.entity.BookEntity;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.ReservationCreateDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.ReservationDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.ReservationRequestDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.ReservationUpdateDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.out.ReservationListResponseDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.out.ReservationResponseDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.entity.ReservationEntity;
 import com.biblioteca.sistemadegestionbibliotecaria.usuario.entity.UsuarioEntity;
@@ -12,6 +15,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 @Mapper(componentModel = "spring")
@@ -42,9 +46,6 @@ public interface IMapperReservation {
         }
 
     // Entity -> DTO
-
-    List<ReservationDTO> reservationEntityListToReservationDTOList(List<ReservationEntity> reservationEntities);
-
     @Mapping(source = "usuario.id", target = "usuarioId")
     @Mapping(source = "book.id", target = "bookId")
     ReservationDTO reservationEntityToReservationDTO(ReservationEntity reservationEntity);
@@ -56,4 +57,16 @@ public interface IMapperReservation {
 
     // Métodos especiales
     void updateReservationEntityFromDTO(ReservationUpdateDTO dto, @MappingTarget ReservationEntity entity);
+
+    // Mapea un Page<ReservationDTO> a ReservationListResponseDTO
+    default ReservationListResponseDTO toBookListResponseDTO(Page<ReservationDTO> page) {
+        return new ReservationListResponseDTO(
+                reservationDTOListToReservationResponseDTOList(page.getContent()),
+                page.getNumber(),
+                page.getTotalPages(),
+                page.getTotalElements(),
+                page.getSize()
+        );
+    }
+
 }
