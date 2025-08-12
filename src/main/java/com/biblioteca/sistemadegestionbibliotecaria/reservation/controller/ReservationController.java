@@ -1,6 +1,5 @@
 package com.biblioteca.sistemadegestionbibliotecaria.reservation.controller;
 
-import com.biblioteca.sistemadegestionbibliotecaria.reservation.api.ReservationApi;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.ReservationCreateDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.ReservationDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.dto.input.ReservationRequestDTO;
@@ -16,8 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -45,7 +42,7 @@ public class ReservationController {
         return ResponseEntity.ok(reservationResponseDTO);
     }
 
-    @PostMapping("/cancel/{id}")
+    @PostMapping("/{id}/cancel")
     public ResponseEntity<ReservationResponseDTO> cancelReservation(@PathVariable Long id,
                                                         @RequestBody @Valid ReservationUpdateDTO reservationUpdateDTO) {
 
@@ -53,6 +50,4 @@ public class ReservationController {
         ReservationResponseDTO reservationResponseDTO = mapperReservation.reservationDTOToReservationResponseDTO(reservationUpdate);
         return ResponseEntity.ok(reservationResponseDTO);
     }
-
-
 }
