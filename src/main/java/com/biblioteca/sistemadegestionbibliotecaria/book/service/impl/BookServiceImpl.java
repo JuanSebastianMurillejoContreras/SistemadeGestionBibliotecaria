@@ -46,7 +46,7 @@ public class BookServiceImpl implements IBookService {
 
     @Override
     public Page<BookDTO> getBookByLibraryOrAuthorOrTitle(Long libraryId, Long authorId, String title, Pageable pageable) {
-        Page<BookEntity> bookEntityPage = bookRepo.searchBooks(libraryId, authorId, title, pageable);
+        Page<BookEntity> bookEntityPage = bookRepo.findByLibraryIdOrAuthorIdOrTitleContainingIgnoreCase(libraryId, authorId, title, pageable);
         return bookEntityPage.map(bookMapper::bookEntityToBookDTO);
     }
 

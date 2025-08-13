@@ -12,16 +12,10 @@ public interface IBookRepo extends JpaRepository<BookEntity, Long> {
     boolean existsByIsbn(String isbn);
     boolean existsByTitle(String title);
 
-        @Query("""
-        SELECT book FROM BookEntity book
-        WHERE (:libraryId IS NULL OR book.library.id = :libraryId)
-        AND (:authorId IS NULL OR book.author.id = :authorId)
-        AND (:title IS NULL OR LOWER(book.title) LIKE LOWER(CONCAT('%', :title, '%')))
-        """)
-        Page<BookEntity> searchBooks(
-                @Param("libraryId") Long libraryId,
-                @Param("authorId") Long authorId,
-                @Param("title") String title,
+        Page<BookEntity> findByLibraryIdOrAuthorIdOrTitleContainingIgnoreCase(
+                Long libraryId,
+                Long authorId,
+                String title,
                 Pageable pageable
         );
-}
+    }

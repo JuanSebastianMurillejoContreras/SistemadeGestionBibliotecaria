@@ -17,8 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/v1/books")
 @RequiredArgsConstructor
@@ -36,7 +34,7 @@ public class BookController implements BookApi {
 
     @GetMapping
     public ResponseEntity<BookListResponseDTO> getBookByLibraryOrAuthorOrTitle(
-                                                            @PageableDefault(page = 0, size = 10) Pageable pageable,
+                                                            @PageableDefault() Pageable pageable,
                                                             @RequestParam(required = false) Long libraryId,
                                                             @RequestParam(required = false) Long authorId,
                                                             @RequestParam(required = false) String title){

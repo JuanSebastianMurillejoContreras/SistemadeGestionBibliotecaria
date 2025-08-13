@@ -24,7 +24,7 @@ public class BookEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(length = 50, unique = true, nullable = false)
     private String title;
 
     @Column(unique = true, nullable = false)
