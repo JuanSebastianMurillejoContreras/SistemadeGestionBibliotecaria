@@ -11,7 +11,7 @@ import org.mapstruct.Mapper;
 public interface ILibraryMapper {
 
     //DTO -> ENTITY
-    LibraryEntity libraryEntityToLibraryCreateDTO(LibraryCreateDTO libraryCreateDTO);
+    LibraryEntity libraryCreateDTOTolibraryEntity(LibraryCreateDTO libraryCreateDTO);
 
     //ENTITY -> DTO
     LibraryDTO libraryEntityToLibraryDTO(LibraryEntity libraryEntity);
