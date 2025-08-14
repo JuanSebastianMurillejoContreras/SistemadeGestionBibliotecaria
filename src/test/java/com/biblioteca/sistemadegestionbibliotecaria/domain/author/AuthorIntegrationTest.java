@@ -1,6 +1,7 @@
 package com.biblioteca.sistemadegestionbibliotecaria.domain.author;
 
 import com.biblioteca.sistemadegestionbibliotecaria.author.dto.input.AuthorRequestDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.author.entity.AuthorEntity;
 import com.biblioteca.sistemadegestionbibliotecaria.author.repo.IAuthorRepo;
 import com.biblioteca.sistemadegestionbibliotecaria.common.AbstractIntegrationTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,7 +46,7 @@ class AuthorIntegrationTest extends AbstractIntegrationTest {
     @Test
     void noDebePermitirAutoresDuplicados() throws Exception {
         // Pre-cargar en DB
-        authorRepo.save(new com.biblioteca.sistemadegestionbibliotecaria.author.entity.AuthorEntity(null, "Borges", null));
+        authorRepo.save(new AuthorEntity(null, "Borges", null));
 
         AuthorRequestDTO request = new AuthorRequestDTO("Borges");
 
@@ -56,7 +57,7 @@ class AuthorIntegrationTest extends AbstractIntegrationTest {
                 .when()
                 .post("/api/v1/authors")
                 .then()
-                .statusCode(HttpStatus.CONFLICT.value()) // o el código que uses en AuthorException
+                .statusCode(HttpStatus.CONFLICT.value()) // o el código que se use en AuthorException
                 .body("message", containsString("El autor ya está registrado en la base de datos: " + request.name()));
     }
 }
