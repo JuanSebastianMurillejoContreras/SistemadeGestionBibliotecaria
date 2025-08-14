@@ -1,5 +1,6 @@
 package com.biblioteca.sistemadegestionbibliotecaria.common;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -24,8 +25,14 @@ public abstract class AbstractIntegrationTest {
         registry.add("spring.datasource.url", POSTGRES::getJdbcUrl);
         registry.add("spring.datasource.username", POSTGRES::getUsername);
         registry.add("spring.datasource.password", POSTGRES::getPassword);
+        registry.add("spring.jpa.hibernate.ddl-auto", () -> "update");
     }
 
     @LocalServerPort
     protected int port;
+
+    @BeforeAll
+    static void startContainer() {
+        POSTGRES.start();
+    }
 }

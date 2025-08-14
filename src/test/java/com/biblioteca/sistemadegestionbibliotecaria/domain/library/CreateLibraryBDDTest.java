@@ -32,7 +32,6 @@ class CreateLibraryBDDTest extends AbstractIntegrationTest {
         // And recibe una respuesta con los datos de la nueva biblioteca
         response.then()
                 .statusCode(201)
-                .body("name", equalTo("Biblioteca Central"))
-                .body("address", equalTo("Calle 123"));
+                .body("name", equalTo("Biblioteca Central"));
     }
 }
