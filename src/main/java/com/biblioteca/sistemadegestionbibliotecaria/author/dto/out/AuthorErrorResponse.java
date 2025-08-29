@@ -1,5 +1,7 @@
 package com.biblioteca.sistemadegestionbibliotecaria.author.dto.out;
 
+import java.util.List;
+
 public record AuthorErrorResponse (
-        String message
+        List<String> message
 ){}

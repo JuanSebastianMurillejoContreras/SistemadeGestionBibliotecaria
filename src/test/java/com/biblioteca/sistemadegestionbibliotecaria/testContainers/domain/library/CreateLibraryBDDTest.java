@@ -4,6 +4,9 @@ import com.biblioteca.sistemadegestionbibliotecaria.testContainers.common.Abstra
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -33,5 +36,37 @@ class CreateLibraryBDDTest extends AbstractIntegrationTest {
         response.then()
                 .statusCode(201)
                 .body("name", equalTo("Biblioteca Central"));
+    }
+
+
+    @Test
+    void registrarBibliotecaConDatosValidos2() {
+        // Given que el administrador desea agregar una nueva biblioteca
+        var requestBody = """
+            {
+              "name": null,
+              "address": ""
+            }
+            """;
+
+        // When envía una solicitud con el nombre y dirección de la biblioteca
+        var response =
+                given()
+                        .port(port)
+                        .contentType(ContentType.JSON)
+                        .body(requestBody)
+                        .when()
+                        .post("/api/v1/libraries");
+
+        // Then la biblioteca se registra correctamente
+        // And recibe una respuesta con los datos de la nueva biblioteca
+
+        List<String> errors = new ArrayList<>();
+        errors.add("name: El nombre de la librería no puede estar vacío");
+        errors.add("address: La dirección de la librería no puede estar vacía");
+
+        response.then()
+                .statusCode(400)
+                .body("message", equalTo(errors));
     }
 }

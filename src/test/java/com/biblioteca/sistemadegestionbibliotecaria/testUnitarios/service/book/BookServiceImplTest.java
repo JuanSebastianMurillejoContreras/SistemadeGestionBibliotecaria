@@ -48,7 +48,14 @@ class BookServiceImplTest {
         bookEntity.setAuthor(authorEntity);
         bookEntity.setLibrary(libraryEntity);
 
-        Mockito.when(bookRepo.save(bookEntity)).thenReturn(bookEntity);
+        BookEntity bookEntity2 = new BookEntity();
+        bookEntity2.setId(1L);
+        bookEntity.setTitle("Libro");
+        bookEntity.setIsbn("9780306406157");
+        bookEntity.setAuthor(authorEntity);
+        bookEntity.setLibrary(libraryEntity);
+
+        Mockito.when(bookRepo.save(bookEntity)).thenReturn(bookEntity2);
 
         BookDTO outPutEsperado = new BookDTO("Libro","9780306406157",1L,1L);
 

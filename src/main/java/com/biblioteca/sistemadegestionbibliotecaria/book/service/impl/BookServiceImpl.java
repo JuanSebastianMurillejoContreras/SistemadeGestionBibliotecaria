@@ -92,9 +92,6 @@ public class BookServiceImpl implements IBookService {
 
         List<String> errors = new ArrayList<>();
 
-        boolean existsByIsbn = bookRepo.existsByIsbn(bookCreateDTO.isbn());
-        boolean existsByTitle = bookRepo.existsByTitle(bookCreateDTO.title());
-
         if (bookCreateDTO.title() == null) {
             throw new IllegalArgumentException("El título no puede ser nulo");
         }
@@ -130,6 +127,9 @@ public class BookServiceImpl implements IBookService {
         if (!bookCreateDTO.isbn().matches("^(\\d{13}|\\d{3}-\\d{1,5}-\\d{1,7}-\\d{1,7}-\\d{1})$")) {
             throw new IllegalArgumentException("El ISBN no tiene un formato válido");
         }
+
+        boolean existsByIsbn = bookRepo.existsByIsbn(bookCreateDTO.isbn());
+        boolean existsByTitle = bookRepo.existsByTitle(bookCreateDTO.title());
 
         if (existsByIsbn)
             errors.add(BookErrorMessage.BOOK_ISBN_ALREADY_REGISTERED + ": " + bookCreateDTO.isbn());
