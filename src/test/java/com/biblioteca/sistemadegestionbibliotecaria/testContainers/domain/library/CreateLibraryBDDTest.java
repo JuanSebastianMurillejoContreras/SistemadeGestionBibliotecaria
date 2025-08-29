@@ -1,6 +1,6 @@
-package com.biblioteca.sistemadegestionbibliotecaria.domain.library;
+package com.biblioteca.sistemadegestionbibliotecaria.testContainers.domain.library;
 
-import com.biblioteca.sistemadegestionbibliotecaria.common.AbstractIntegrationTest;
+import com.biblioteca.sistemadegestionbibliotecaria.testContainers.common.AbstractIntegrationTest;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 

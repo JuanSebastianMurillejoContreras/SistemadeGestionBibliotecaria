@@ -1,5 +1,7 @@
 package com.biblioteca.sistemadegestionbibliotecaria.libraries.service.impl;
 
+import com.biblioteca.sistemadegestionbibliotecaria.book.dto.input.BookCreateDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.book.service.IBookService;
 import com.biblioteca.sistemadegestionbibliotecaria.libraries.constants.LibraryErrorMessage;
 import com.biblioteca.sistemadegestionbibliotecaria.libraries.dto.input.LibraryCreateDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.libraries.dto.input.LibraryDTO;
@@ -18,8 +20,39 @@ public class LibraryServiceImpl implements ILibraryService {
     private final ILibraryRepo libraryRepo;
     private final ILibraryMapper libraryMapper;
 
+    /*
     @Override
     public LibraryDTO createLibrary(LibraryCreateDTO libraryCreateDTO) {
+
+        LibraryEntity libraryEntity = new LibraryEntity();
+        libraryEntity.setName(libraryCreateDTO.name());
+        libraryEntity.setAddress(libraryCreateDTO.address());
+
+        libraryRepo.save(libraryEntity);
+
+        LibraryDTO libraryDTO = libraryMapper.libraryEntityToLibraryDTO(libraryEntity);
+        return libraryDTO;
+    }
+*/
+
+    @Override
+    public LibraryDTO createLibrary(LibraryCreateDTO libraryCreateDTO) {
+
+        if (libraryCreateDTO.name() == null){
+            throw new IllegalArgumentException("El nombre del autor no puede ser nulo");
+        }
+
+        if (libraryCreateDTO.address() == null){
+            throw new IllegalArgumentException("La direccion de la librería no puede ser nula");
+        }
+
+        if (libraryCreateDTO.name().isEmpty()){
+            throw new IllegalArgumentException("El nombre del autor no puede estar vacío");
+        }
+
+        if (libraryCreateDTO.address().isEmpty()){
+            throw new IllegalArgumentException("La direccion de la librería no puede estar vacía");
+        }
 
         final boolean existsLibrary = libraryRepo.existsByName(libraryCreateDTO.name());
 
@@ -31,4 +64,5 @@ public class LibraryServiceImpl implements ILibraryService {
 
         return libraryMapper.libraryEntityToLibraryDTO(libraryEntitySave);
     }
+
 }

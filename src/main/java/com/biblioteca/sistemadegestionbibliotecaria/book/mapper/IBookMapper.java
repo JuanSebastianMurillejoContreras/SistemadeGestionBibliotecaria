@@ -3,8 +3,8 @@ package com.biblioteca.sistemadegestionbibliotecaria.book.mapper;
 import com.biblioteca.sistemadegestionbibliotecaria.book.dto.input.BookCreateDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.book.dto.input.BookDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.book.dto.input.BookRequestDTO;
-import com.biblioteca.sistemadegestionbibliotecaria.book.dto.out.BookListResponseDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.book.dto.out.BookResponseDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.testContainers.common.dto.PageDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.book.entity.BookEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -37,8 +37,8 @@ public interface IBookMapper {
 
 
     // Mapea un Page<BookDTO> a BookListResponseDTO
-    default BookListResponseDTO toBookListResponseDTO(Page<BookDTO> page) {
-        return new BookListResponseDTO(
+    default PageDTO<BookResponseDTO> pageBookDTOToPageDTOBookResponseDTO(Page<BookDTO> page) {
+        return new PageDTO<>(
                 bookDTOToBookResponseListDTO(page.getContent()),
                 page.getNumber(),
                 page.getTotalPages(),

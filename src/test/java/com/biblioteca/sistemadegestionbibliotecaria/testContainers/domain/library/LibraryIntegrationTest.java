@@ -1,13 +1,10 @@
-package com.biblioteca.sistemadegestionbibliotecaria.domain.library;
+package com.biblioteca.sistemadegestionbibliotecaria.testContainers.domain.library;
 
-import com.biblioteca.sistemadegestionbibliotecaria.author.dto.input.AuthorRequestDTO;
-import com.biblioteca.sistemadegestionbibliotecaria.author.repo.IAuthorRepo;
-import com.biblioteca.sistemadegestionbibliotecaria.common.AbstractIntegrationTest;
+import com.biblioteca.sistemadegestionbibliotecaria.testContainers.common.AbstractIntegrationTest;
 import com.biblioteca.sistemadegestionbibliotecaria.libraries.dto.input.LibraryRequestDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.libraries.entity.LibraryEntity;
 import com.biblioteca.sistemadegestionbibliotecaria.libraries.repo.ILibraryRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.server.LocalServerPort;

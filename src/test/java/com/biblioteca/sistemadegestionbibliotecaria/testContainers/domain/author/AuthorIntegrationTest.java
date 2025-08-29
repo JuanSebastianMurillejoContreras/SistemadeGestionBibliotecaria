@@ -1,9 +1,9 @@
-package com.biblioteca.sistemadegestionbibliotecaria.domain.author;
+package com.biblioteca.sistemadegestionbibliotecaria.testContainers.domain.author;
 
 import com.biblioteca.sistemadegestionbibliotecaria.author.dto.input.AuthorRequestDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.author.entity.AuthorEntity;
 import com.biblioteca.sistemadegestionbibliotecaria.author.repo.IAuthorRepo;
-import com.biblioteca.sistemadegestionbibliotecaria.common.AbstractIntegrationTest;
+import com.biblioteca.sistemadegestionbibliotecaria.testContainers.common.AbstractIntegrationTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,6 +3,7 @@ package com.biblioteca.sistemadegestionbibliotecaria.book.api;
 import com.biblioteca.sistemadegestionbibliotecaria.book.dto.input.BookRequestDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.book.dto.out.BookListResponseDTO;
 import com.biblioteca.sistemadegestionbibliotecaria.book.dto.out.BookResponseDTO;
+import com.biblioteca.sistemadegestionbibliotecaria.testContainers.common.dto.PageDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -49,7 +50,7 @@ public interface BookApi {
                     content = @Content(schema = @Schema(implementation = BookListResponseDTO.class)))
     })
     @GetMapping
-    ResponseEntity<BookListResponseDTO> getBookByLibraryOrAuthorOrTitle(
+    ResponseEntity<PageDTO<BookResponseDTO>> getBookByLibraryOrAuthorOrTitle(
             @PageableDefault(page = 0, size = 5) Pageable pageable,
 
             @Parameter(description = "ID de la biblioteca para filtrar", example = "1")

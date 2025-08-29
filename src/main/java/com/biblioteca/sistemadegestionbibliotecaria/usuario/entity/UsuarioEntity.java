@@ -2,7 +2,9 @@ package com.biblioteca.sistemadegestionbibliotecaria.usuario.entity;
 
 import com.biblioteca.sistemadegestionbibliotecaria.reservation.entity.ReservationEntity;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -10,6 +12,8 @@ import java.util.Objects;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_usuario")
 public class UsuarioEntity {

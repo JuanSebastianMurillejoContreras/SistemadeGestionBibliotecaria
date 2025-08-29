@@ -24,6 +24,27 @@ public class UsuarioServiceImpl implements IUsuarioService {
     @Override
         public UsuarioDTO createUsuario(UsuarioCreateDTO usuarioCreateDTO) {
 
+        if (usuarioCreateDTO.name() == null) {
+            throw new IllegalArgumentException("El nombre no puede ser nulo");
+        }
+
+        if (usuarioCreateDTO.email() == null) {
+            throw new IllegalArgumentException("El email no puede ser nulo");
+        }
+
+        if (usuarioCreateDTO.name().isEmpty()) {
+            throw new IllegalArgumentException("El nombre no puede esta vacío");
+        }
+
+        if (usuarioCreateDTO.email().isEmpty()) {
+            throw new IllegalArgumentException("El email no puede estar vacío");
+        }
+
+        if (!usuarioCreateDTO.email().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            throw new IllegalArgumentException("El email registrado debe tener un formato válido: ejemplo@mail.com");
+        }
+
+
         List<String> errors = new ArrayList<>();
 
         if (usuarioRepo.existsByName(usuarioCreateDTO.name()))

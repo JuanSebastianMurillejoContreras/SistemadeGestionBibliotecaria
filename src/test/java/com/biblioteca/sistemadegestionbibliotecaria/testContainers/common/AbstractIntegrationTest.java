@@ -1,4 +1,4 @@
-package com.biblioteca.sistemadegestionbibliotecaria.common;
+package com.biblioteca.sistemadegestionbibliotecaria.testContainers.common;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.test.context.SpringBootTest;

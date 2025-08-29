@@ -1,9 +1,9 @@
-package com.biblioteca.sistemadegestionbibliotecaria.domain.book;
+package com.biblioteca.sistemadegestionbibliotecaria.testContainers.domain.book;
 
 import com.biblioteca.sistemadegestionbibliotecaria.author.entity.AuthorEntity;
 import com.biblioteca.sistemadegestionbibliotecaria.author.repo.IAuthorRepo;
 import com.biblioteca.sistemadegestionbibliotecaria.book.repo.IBookRepo;
-import com.biblioteca.sistemadegestionbibliotecaria.common.AbstractIntegrationTest;
+import com.biblioteca.sistemadegestionbibliotecaria.testContainers.common.AbstractIntegrationTest;
 import com.biblioteca.sistemadegestionbibliotecaria.libraries.entity.LibraryEntity;
 import com.biblioteca.sistemadegestionbibliotecaria.libraries.repo.ILibraryRepo;
 import io.restassured.http.ContentType;
