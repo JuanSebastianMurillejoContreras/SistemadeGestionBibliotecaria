@@ -16,6 +16,7 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 public class LibraryServiceImplTest {
@@ -28,7 +29,7 @@ public class LibraryServiceImplTest {
     private ILibraryMapper libraryMapper = Mappers.getMapper(ILibraryMapper.class);
 
     @Test
-    void givenLibraryRequestDTOWhenAddLibraryThenReturnLibraryResponseDTO() {
+    void givenLibraryRequestDTOWhencreateLibraryThenReturnLibraryResponseDTO() {
         //Given
         LibraryCreateDTO input = new LibraryCreateDTO("Alejandria","Grecia");
 
@@ -51,5 +52,42 @@ public class LibraryServiceImplTest {
         assertEquals(outPutEsperado, resultado);
 
     }
+
+    @Test
+    void givenLibraryRequestDTOWhencreateLibraryWithNullNameThenThrowException() {
+        // given
+        LibraryCreateDTO input = new LibraryCreateDTO(null, "Calle 123");
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> libraryService.createLibrary(input));
+    }
+
+    @Test
+    void givenLibraryRequestDTOWhencreateLibraryWithEmptyNameThenThrowException() {
+        // given
+        LibraryCreateDTO input = new LibraryCreateDTO("", "Calle 123");
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> libraryService.createLibrary(input));
+    }
+
+    @Test
+    void givenLibraryRequestDTOWhencreateLibraryWithNullAddressThenThrowException() {
+        // given
+        LibraryCreateDTO input = new LibraryCreateDTO("Biblioteca Nacional", null);
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> libraryService.createLibrary(input));
+    }
+
+    @Test
+    void givenLibraryRequestDTOWhencreateLibraryWithEmptyAddressThenThrowException() {
+        // given
+        LibraryCreateDTO input = new LibraryCreateDTO("Biblioteca Nacional", "");
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> libraryService.createLibrary(input));
+    }
+
 
 }

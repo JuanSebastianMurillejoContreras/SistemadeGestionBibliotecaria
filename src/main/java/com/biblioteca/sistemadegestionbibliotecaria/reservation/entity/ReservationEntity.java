@@ -3,7 +3,9 @@ package com.biblioteca.sistemadegestionbibliotecaria.reservation.entity;
 import com.biblioteca.sistemadegestionbibliotecaria.book.entity.BookEntity;
 import com.biblioteca.sistemadegestionbibliotecaria.usuario.entity.UsuarioEntity;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -11,6 +13,8 @@ import java.util.Objects;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_reserva")
 public class ReservationEntity {
